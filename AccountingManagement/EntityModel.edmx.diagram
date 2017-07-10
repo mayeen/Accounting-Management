@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16bd09adf6d244bfbb16540199627263" Name="Diagram1">
+        <EntityTypeShape EntityType="AccountingDatabaseModel.Account" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingDatabaseModel.AccountType" Width="1.5" PointX="1.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingDatabaseModel.Employee" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingDatabaseModel.Support" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AccountingDatabaseModel.Voucher" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="AccountingDatabaseModel.FK_Account_AccountType" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingDatabaseModel.FK_Vouchers_Account_credit_code" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingDatabaseModel.FK_Vouchers_Account_debit_code" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingDatabaseModel.FK_Vouchers_Employee_authentication_EmpID" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingDatabaseModel.FK_Vouchers_Employee_PreparedBy_EmpID" ManuallyRouted="false" />
+        <AssociationConnector Association="AccountingDatabaseModel.FK_Support_Vouchers" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5" PointY="4.5186979166666656" />
+          <ConnectorPoint PointX="4.5" PointY="10.636394484069825" />
+          <ConnectorPoint PointX="4.6666666666666687" PointY="10.636394484069825" />
+          <ConnectorPoint PointX="4.6666666666666687" PointY="10.500977817403157" />
+          <ConnectorPoint PointX="4.9791666666666679" PointY="10.428068827989371" />
+          <ConnectorPoint PointX="4.9791666666666679" PointY="10.667652161322705" />
+          <ConnectorPoint PointX="5.1354166666666679" PointY="10.667652161322705" />
+          <ConnectorPoint PointX="5.1354166666666679" PointY="9.0634854946560388" />
+          <ConnectorPoint PointX="5.75" PointY="5.2070251806844094" />
+          <ConnectorPoint PointX="5.75" PointY="2.537985026041667" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

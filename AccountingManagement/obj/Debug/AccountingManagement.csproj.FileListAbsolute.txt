@@ -1,0 +1,13 @@
+c:\users\ddm-sd\documents\visual studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\AccountingManagement.exe.config
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.csprojResolveAssemblyReference.cache
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.Properties.Resources.resources
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.csproj.GenerateResource.Cache
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\AccountingManagement.exe
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\AccountingManagement.pdb
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\EntityFramework.dll
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\EntityFramework.xml
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.exe
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.pdb
+C:\Users\DDM-SD\documents\visual studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.MainForm.resources

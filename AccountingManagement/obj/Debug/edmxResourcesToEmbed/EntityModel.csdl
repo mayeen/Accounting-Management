@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AccountingDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AccountType" Relationship="Self.FK_Account_AccountType" FromRole="Account" ToRole="AccountType" />
+    <NavigationProperty Name="Vouchers" Relationship="Self.FK_Vouchers_Account_credit_code" FromRole="Account" ToRole="Vouchers" />
+    <NavigationProperty Name="Vouchers1" Relationship="Self.FK_Vouchers_Account_debit_code" FromRole="Account" ToRole="Vouchers" />
+  </EntityType>
+  <EntityType Name="AccountType">
+    <Key>
+      <PropertyRef Name="Cat_ID" />
+    </Key>
+    <Property Name="Cat_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_AccountType" FromRole="AccountType" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Emp_ID" />
+    </Key>
+    <Property Name="Emp_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MInit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNo" Type="Int32" />
+    <Property Name="Super_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vouchers" Relationship="Self.FK_Vouchers_Employee_authentication_EmpID" FromRole="Employee" ToRole="Vouchers" />
+    <NavigationProperty Name="Vouchers1" Relationship="Self.FK_Vouchers_Employee_PreparedBy_EmpID" FromRole="Employee" ToRole="Vouchers" />
+  </EntityType>
+  <EntityType Name="Support">
+    <Key>
+      <PropertyRef Name="VNo" />
+      <PropertyRef Name="SNo" />
+    </Key>
+    <Property Name="VNo" Type="Int32" Nullable="false" />
+    <Property Name="SNo" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Voucher" Relationship="AccountingDatabaseModel.FK_Support_Vouchers" FromRole="Support" ToRole="Voucher" />
+  </EntityType>
+  <EntityType Name="Voucher">
+    <Key>
+      <PropertyRef Name="VNo" />
+    </Key>
+    <Property Name="VNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Debit" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="VDate" Type="DateTime" Precision="0" />
+    <Property Name="Credit" Type="Int32" Nullable="false" />
+    <Property Name="Narration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AuthenticationBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PreparedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Vouchers_Account_credit_code" FromRole="Vouchers" ToRole="Account" />
+    <NavigationProperty Name="Account1" Relationship="Self.FK_Vouchers_Account_debit_code" FromRole="Vouchers" ToRole="Account" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Vouchers_Employee_authentication_EmpID" FromRole="Vouchers" ToRole="Employee" />
+    <NavigationProperty Name="Employee1" Relationship="Self.FK_Vouchers_Employee_PreparedBy_EmpID" FromRole="Vouchers" ToRole="Employee" />
+    <NavigationProperty Name="Supports" Relationship="AccountingDatabaseModel.FK_Support_Vouchers" FromRole="Voucher" ToRole="Support" />
+  </EntityType>
+  <Association Name="FK_Account_AccountType">
+    <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountType">
+        <PropertyRef Name="Cat_ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vouchers_Account_credit_code">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Vouchers" Type="Self.Voucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Vouchers">
+        <PropertyRef Name="Credit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vouchers_Account_debit_code">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Vouchers" Type="Self.Voucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="Vouchers">
+        <PropertyRef Name="Debit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vouchers_Employee_authentication_EmpID">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Vouchers" Type="Self.Voucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Emp_ID" />
+      </Principal>
+      <Dependent Role="Vouchers">
+        <PropertyRef Name="AuthenticationBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vouchers_Employee_PreparedBy_EmpID">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Vouchers" Type="Self.Voucher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Emp_ID" />
+      </Principal>
+      <Dependent Role="Vouchers">
+        <PropertyRef Name="PreparedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AccountingEntity" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Supports" EntityType="Self.Support" />
+    <EntitySet Name="Vouchers" EntityType="Self.Voucher" />
+    <AssociationSet Name="FK_Account_AccountType" Association="Self.FK_Account_AccountType">
+      <End Role="AccountType" EntitySet="AccountTypes" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vouchers_Account_credit_code" Association="Self.FK_Vouchers_Account_credit_code">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Vouchers" EntitySet="Vouchers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vouchers_Account_debit_code" Association="Self.FK_Vouchers_Account_debit_code">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Vouchers" EntitySet="Vouchers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vouchers_Employee_authentication_EmpID" Association="Self.FK_Vouchers_Employee_authentication_EmpID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Vouchers" EntitySet="Vouchers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vouchers_Employee_PreparedBy_EmpID" Association="Self.FK_Vouchers_Employee_PreparedBy_EmpID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Vouchers" EntitySet="Vouchers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Support_Vouchers" Association="AccountingDatabaseModel.FK_Support_Vouchers">
+      <End Role="Voucher" EntitySet="Vouchers" />
+      <End Role="Support" EntitySet="Supports" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Support_Vouchers">
+    <End Type="AccountingDatabaseModel.Voucher" Role="Voucher" Multiplicity="1" />
+    <End Type="AccountingDatabaseModel.Support" Role="Support" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Voucher">
+        <PropertyRef Name="VNo" />
+      </Principal>
+      <Dependent Role="Support">
+        <PropertyRef Name="VNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
