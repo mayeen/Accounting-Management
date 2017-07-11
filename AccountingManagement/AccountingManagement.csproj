@@ -83,6 +83,8 @@
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\AccountQuery.cs" />
+    <Compile Include="Model\EmployeeQuery.cs" />
+    <Compile Include="Model\VoucherQuery.cs" />
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +96,7 @@
     <Compile Include="Support.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewSupportClass.cs" />
     <Compile Include="Voucher.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>

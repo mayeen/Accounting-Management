@@ -35,14 +35,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.AmountTextBox = new System.Windows.Forms.TextBox();
             this.PaidByComboBox = new System.Windows.Forms.ComboBox();
-            this.AccountComboBox = new System.Windows.Forms.ComboBox();
+            this.TransactionTypeComboBox = new System.Windows.Forms.ComboBox();
             this.AuthorisedByComboBox = new System.Windows.Forms.ComboBox();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.DateLabel = new System.Windows.Forms.Label();
             this.VoucherLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.NarrationTextBox = new System.Windows.Forms.TextBox();
             this.listView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
@@ -80,17 +80,17 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(510, 181);
+            this.label4.Location = new System.Drawing.Point(493, 191);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 16);
+            this.label4.Size = new System.Drawing.Size(108, 16);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Expense type";
+            this.label4.Text = "Transaction type";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(510, 114);
+            this.label5.Location = new System.Drawing.Point(493, 112);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 16);
             this.label5.TabIndex = 4;
@@ -102,6 +102,7 @@
             this.AmountTextBox.Name = "AmountTextBox";
             this.AmountTextBox.Size = new System.Drawing.Size(100, 20);
             this.AmountTextBox.TabIndex = 6;
+            this.AmountTextBox.TextChanged += new System.EventHandler(this.AmountTextBox_TextChanged);
             // 
             // PaidByComboBox
             // 
@@ -110,14 +111,16 @@
             this.PaidByComboBox.Name = "PaidByComboBox";
             this.PaidByComboBox.Size = new System.Drawing.Size(121, 21);
             this.PaidByComboBox.TabIndex = 7;
+            this.PaidByComboBox.SelectedIndexChanged += new System.EventHandler(this.PaidByComboBox_SelectedIndexChanged);
             // 
-            // AccountComboBox
+            // TransactionTypeComboBox
             // 
-            this.AccountComboBox.FormattingEnabled = true;
-            this.AccountComboBox.Location = new System.Drawing.Point(607, 186);
-            this.AccountComboBox.Name = "AccountComboBox";
-            this.AccountComboBox.Size = new System.Drawing.Size(204, 21);
-            this.AccountComboBox.TabIndex = 8;
+            this.TransactionTypeComboBox.FormattingEnabled = true;
+            this.TransactionTypeComboBox.Location = new System.Drawing.Point(607, 186);
+            this.TransactionTypeComboBox.Name = "TransactionTypeComboBox";
+            this.TransactionTypeComboBox.Size = new System.Drawing.Size(204, 21);
+            this.TransactionTypeComboBox.TabIndex = 8;
+            this.TransactionTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.TransactionTypeComboBox_SelectedIndexChanged);
             // 
             // AuthorisedByComboBox
             // 
@@ -136,12 +139,13 @@
             this.SubmitButton.TabIndex = 10;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = true;
+            this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(510, 54);
+            this.label6.Location = new System.Drawing.Point(493, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 16);
             this.label6.TabIndex = 11;
@@ -151,7 +155,7 @@
             // 
             this.DateLabel.AutoSize = true;
             this.DateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DateLabel.Location = new System.Drawing.Point(687, 54);
+            this.DateLabel.Location = new System.Drawing.Point(604, 51);
             this.DateLabel.Name = "DateLabel";
             this.DateLabel.Size = new System.Drawing.Size(80, 16);
             this.DateLabel.TabIndex = 12;
@@ -176,13 +180,14 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Narration";
             // 
-            // textBox1
+            // NarrationTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(160, 242);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(312, 75);
-            this.textBox1.TabIndex = 15;
+            this.NarrationTextBox.Location = new System.Drawing.Point(160, 242);
+            this.NarrationTextBox.Multiline = true;
+            this.NarrationTextBox.Name = "NarrationTextBox";
+            this.NarrationTextBox.Size = new System.Drawing.Size(312, 75);
+            this.NarrationTextBox.TabIndex = 15;
+            this.NarrationTextBox.TextChanged += new System.EventHandler(this.NarrationTextBox_TextChanged_1);
             // 
             // listView
             // 
@@ -200,14 +205,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 500);
             this.Controls.Add(this.listView);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.NarrationTextBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.VoucherLabel);
             this.Controls.Add(this.DateLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.AuthorisedByComboBox);
-            this.Controls.Add(this.AccountComboBox);
+            this.Controls.Add(this.TransactionTypeComboBox);
             this.Controls.Add(this.PaidByComboBox);
             this.Controls.Add(this.AmountTextBox);
             this.Controls.Add(this.label5);
@@ -232,14 +237,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox AmountTextBox;
         private System.Windows.Forms.ComboBox PaidByComboBox;
-        private System.Windows.Forms.ComboBox AccountComboBox;
+        private System.Windows.Forms.ComboBox TransactionTypeComboBox;
         private System.Windows.Forms.ComboBox AuthorisedByComboBox;
         private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Label VoucherLabel;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox NarrationTextBox;
         private System.Windows.Forms.ListView listView;
     }
 }
