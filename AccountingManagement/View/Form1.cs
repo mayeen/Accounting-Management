@@ -22,7 +22,57 @@ namespace AccountingManagement
         int paidBy = 0, transactionType = 0,amount=0;
         string employeeID = "dont work",narration="dont work";
         DateTime date;
+        public void GetStuff()
+        {
+            using (AccountingEntity context = new AccountingEntity())
+            {
+                var results = from v in context.Vouchers
+                              join em in context.Employees
+                              on v.AuthenticationBy equals em.Emp_ID
+                              join accDebit in context.Accounts
+                              on v.Debit equals accDebit.Code 
+                              join accCredit in context.Accounts
+                              on v.Credit equals accCredit.Code
 
+                              select new
+                              {
+                                  voucherNo = v.VNo,
+                                  Debit=accDebit.Name,
+                                  Amount=v.Amount,
+                                  Credit=accCredit.Name,
+                                  Date=v.VDate,
+                                  Narration=v.Narration,
+                                  Authentication= em.FName
+                                  //State = r.StateNavigationProperty.StateLabel, //If FK
+                                  //State = _context.State.First(state => state.StateId == r.StateId), //If Not FK
+                                  //HostAddress = r.ServerReference.Value.HostAddress,
+                                  //TimeStamp = r.TimeStamp
+                              };
+                var item = results.ToList();
+                foreach (var user in item)
+                {
+                    ListViewItem lv = new ListViewItem(user.voucherNo.ToString());
+
+                    lv.SubItems.Add(user.Debit.ToString());
+                    lv.SubItems.Add(user.Amount.ToString());
+                    lv.SubItems.Add(user.Credit.ToString());
+                    lv.SubItems.Add(user.Date.ToString());
+                    lv.SubItems.Add(user.Narration.ToString());
+                    lv.SubItems.Add(user.Authentication.ToString());
+
+                    listView.Items.Add(lv);
+                }
+
+                listView.Columns.Add("Voucher Number", 100, HorizontalAlignment.Left);
+                listView.Columns.Add("Debit", 100, HorizontalAlignment.Left);
+                listView.Columns.Add("Amount", 100, HorizontalAlignment.Left);
+                listView.Columns.Add("Credit", 100, HorizontalAlignment.Left);
+                listView.Columns.Add("Date", 100, HorizontalAlignment.Left);
+                listView.Columns.Add("Narration", 100, HorizontalAlignment.Left);
+                listView.Columns.Add("Authentication By", 100, HorizontalAlignment.Left);
+
+            }
+        }
         public void AddDataTransactionComboBox()
         {
             DataTable dt = AccountQuery.AccountTable();
@@ -47,6 +97,10 @@ namespace AccountingManagement
             AuthorisedByComboBox.DataSource = dt;
 
         }
+        public void DisplayData()
+        {
+            
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -60,10 +114,12 @@ namespace AccountingManagement
             //call method to populate Account related ComboBoxes
             AddDataTransactionComboBox();
             AddDataPaidByComboBox();
-          
+            GetStuff();
+
+            
             // here I have populated Account Table with data that will work only one time 
-           //AccountQuery acc = new AccountQuery();
-           //acc.AccountDataEntry();
+            //AccountQuery acc = new AccountQuery();
+            //acc.AccountDataEntry();
 
         }
 
@@ -87,6 +143,11 @@ namespace AccountingManagement
             ComboBox cmb = (ComboBox)sender;
             paidBy = Int32.Parse((string)cmb.SelectedValue);
             //MessageBox.Show(selectedValue.ToString());
+
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 

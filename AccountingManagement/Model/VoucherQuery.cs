@@ -26,6 +26,12 @@ namespace AccountingManagement.Model
               //  MessageBox.Show(voucher.AuthenticationBy.ToString());
                 context.SaveChanges();
             }
+
+        }
+
+        public void DisplayVoucherData()
+        {
+            
         }
     }
 }

@@ -198,6 +198,8 @@
             this.listView.Size = new System.Drawing.Size(651, 136);
             this.listView.TabIndex = 16;
             this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -245,7 +247,7 @@
         private System.Windows.Forms.Label VoucherLabel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox NarrationTextBox;
-        private System.Windows.Forms.ListView listView;
+        internal System.Windows.Forms.ListView listView;
     }
 }
 
