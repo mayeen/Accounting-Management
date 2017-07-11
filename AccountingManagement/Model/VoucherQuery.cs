@@ -29,9 +29,38 @@ namespace AccountingManagement.Model
 
         }
 
-        public void DisplayVoucherData()
+        public dynamic DisplayVoucherData()
         {
             
+             
+            using (AccountingEntity context = new AccountingEntity())
+            {
+                var results = from v in context.Vouchers
+                              join em in context.Employees
+                              on v.AuthenticationBy equals em.Emp_ID
+                              join accDebit in context.Accounts
+                              on v.Debit equals accDebit.Code
+                              join accCredit in context.Accounts
+                              on v.Credit equals accCredit.Code
+
+                              select new
+                              {
+                                  voucherNo = v.VNo,
+                                  Debit = accDebit.Name,
+                                  Amount = v.Amount,
+                                  Credit = accCredit.Name,
+                                  Date = v.VDate,
+                                  Narration = v.Narration,
+                                  Authentication = em.FName
+                                  //State = r.StateNavigationProperty.StateLabel, //If FK
+                                  //State = _context.State.First(state => state.StateId == r.StateId), //If Not FK
+                                  //HostAddress = r.ServerReference.Value.HostAddress,
+                                  //TimeStamp = r.TimeStamp
+                              };
+                var resultToList = results.ToList();
+                return resultToList;
+            }
+                 
         }
     }
 }

@@ -24,31 +24,34 @@ namespace AccountingManagement
         DateTime date;
         public void GetStuff()
         {
-            using (AccountingEntity context = new AccountingEntity())
-            {
-                var results = from v in context.Vouchers
-                              join em in context.Employees
-                              on v.AuthenticationBy equals em.Emp_ID
-                              join accDebit in context.Accounts
-                              on v.Debit equals accDebit.Code 
-                              join accCredit in context.Accounts
-                              on v.Credit equals accCredit.Code
+            //using (AccountingEntity context = new AccountingEntity())
+            //{
+            //    var results = from v in context.Vouchers
+            //                  join em in context.Employees
+            //                  on v.AuthenticationBy equals em.Emp_ID
+            //                  join accDebit in context.Accounts
+            //                  on v.Debit equals accDebit.Code 
+            //                  join accCredit in context.Accounts
+            //                  on v.Credit equals accCredit.Code
 
-                              select new
-                              {
-                                  voucherNo = v.VNo,
-                                  Debit=accDebit.Name,
-                                  Amount=v.Amount,
-                                  Credit=accCredit.Name,
-                                  Date=v.VDate,
-                                  Narration=v.Narration,
-                                  Authentication= em.FName
-                                  //State = r.StateNavigationProperty.StateLabel, //If FK
-                                  //State = _context.State.First(state => state.StateId == r.StateId), //If Not FK
-                                  //HostAddress = r.ServerReference.Value.HostAddress,
-                                  //TimeStamp = r.TimeStamp
-                              };
-                var item = results.ToList();
+            //                  select new
+            //                  {
+            //                      voucherNo = v.VNo,
+            //                      Debit=accDebit.Name,
+            //                      Amount=v.Amount,
+            //                      Credit=accCredit.Name,
+            //                      Date=v.VDate,
+            //                      Narration=v.Narration,
+            //                      Authentication= em.FName
+            //                      //State = r.StateNavigationProperty.StateLabel, //If FK
+            //                      //State = _context.State.First(state => state.StateId == r.StateId), //If Not FK
+            //                      //HostAddress = r.ServerReference.Value.HostAddress,
+            //                      //TimeStamp = r.TimeStamp
+            //                  };
+
+            //var item = results.ToList();
+            VoucherQuery voucher = new VoucherQuery();
+            var item = voucher.DisplayVoucherData();
                 foreach (var user in item)
                 {
                     ListViewItem lv = new ListViewItem(user.voucherNo.ToString());
@@ -71,7 +74,7 @@ namespace AccountingManagement
                 listView.Columns.Add("Narration", 100, HorizontalAlignment.Left);
                 listView.Columns.Add("Authentication By", 100, HorizontalAlignment.Left);
 
-            }
+            
         }
         public void AddDataTransactionComboBox()
         {
