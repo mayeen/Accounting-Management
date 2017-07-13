@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AccountingManagement.Model
 {
@@ -19,12 +20,48 @@ namespace AccountingManagement.Model
                 dt.Columns.Add("name");
                 foreach (Account usepurpose in usepurposes)
                 {
+                   // if (usepurpose.Type==4)
                     dt.Rows.Add(usepurpose.Code, usepurpose.Name);
                 }
                 return dt;
             }
 
         }
+
+        public static DataTable TransactionTable(int x)
+        {
+            int code = x;
+
+            using (AccountingEntity c = new AccountingEntity())
+
+            {
+                List<Account> usepurposes = c.Accounts.ToList();
+                Account account = new Account();
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("id");
+                dt.Columns.Add("name");
+                var query = from ac in c.Accounts
+                            where ac.Code == code
+                            select ac.Type;
+                int type = query.FirstOrDefault();
+               
+
+                //var queryToList = query.ToList();
+                //int type= Convert.ToInt32( query);
+
+                foreach (Account usepurpose in usepurposes)
+                {
+
+                    if (usepurpose.Type != type )
+                    {
+                        dt.Rows.Add(usepurpose.Code, usepurpose.Name);
+                    }
+                }
+                return dt;
+            }
+
+        }        
 
 
 

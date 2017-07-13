@@ -56,6 +56,7 @@ namespace AccountingManagement.Model
                                   //State = _context.State.First(state => state.StateId == r.StateId), //If Not FK
                                   //HostAddress = r.ServerReference.Value.HostAddress,
                                   //TimeStamp = r.TimeStamp
+                                  
                               };
                 var resultToList = results.ToList();
                 return resultToList;

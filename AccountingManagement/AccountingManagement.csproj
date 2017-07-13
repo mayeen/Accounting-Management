@@ -64,6 +64,9 @@
     <Compile Include="AccountType.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controller\AccountControl.cs" />
+    <Compile Include="Controller\EmployeeControl.cs" />
+    <Compile Include="Controller\VoucherControl.cs" />
     <Compile Include="Employee.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -85,6 +88,12 @@
     <Compile Include="Model\AccountQuery.cs" />
     <Compile Include="Model\EmployeeQuery.cs" />
     <Compile Include="Model\VoucherQuery.cs" />
+    <Compile Include="View\EditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EditForm.Designer.cs">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +109,9 @@
     <Compile Include="Voucher.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\EditForm.resx">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,9 +162,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

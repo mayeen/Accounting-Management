@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 using AccountingManagement.Model;
+using AccountingManagement.Controller;
+using AccountingManagement.View;
 
 namespace AccountingManagement
 {
@@ -24,35 +26,16 @@ namespace AccountingManagement
         DateTime date;
         public void GetStuff()
         {
-            //using (AccountingEntity context = new AccountingEntity())
-            //{
-            //    var results = from v in context.Vouchers
-            //                  join em in context.Employees
-            //                  on v.AuthenticationBy equals em.Emp_ID
-            //                  join accDebit in context.Accounts
-            //                  on v.Debit equals accDebit.Code 
-            //                  join accCredit in context.Accounts
-            //                  on v.Credit equals accCredit.Code
+            BindingSource bindingSource = new BindingSource();
+            VoucherControl voucher = new VoucherControl();
+            var item = voucher.VoucherDataControl();
 
-            //                  select new
-            //                  {
-            //                      voucherNo = v.VNo,
-            //                      Debit=accDebit.Name,
-            //                      Amount=v.Amount,
-            //                      Credit=accCredit.Name,
-            //                      Date=v.VDate,
-            //                      Narration=v.Narration,
-            //                      Authentication= em.FName
-            //                      //State = r.StateNavigationProperty.StateLabel, //If FK
-            //                      //State = _context.State.First(state => state.StateId == r.StateId), //If Not FK
-            //                      //HostAddress = r.ServerReference.Value.HostAddress,
-            //                      //TimeStamp = r.TimeStamp
-            //                  };
-
-            //var item = results.ToList();
-            VoucherQuery voucher = new VoucherQuery();
-            var item = voucher.DisplayVoucherData();
-                foreach (var user in item)
+            //show in dataGridView
+            bindingSource.DataSource = item;
+            dataGridView.DataSource = bindingSource;
+            
+            //show in list view
+               foreach (var user in item)
                 {
                     ListViewItem lv = new ListViewItem(user.voucherNo.ToString());
 
@@ -63,7 +46,8 @@ namespace AccountingManagement
                     lv.SubItems.Add(user.Narration.ToString());
                     lv.SubItems.Add(user.Authentication.ToString());
 
-                    listView.Items.Add(lv);
+                
+                listView.Items.Add(lv);
                 }
 
                 listView.Columns.Add("Voucher Number", 100, HorizontalAlignment.Left);
@@ -78,7 +62,7 @@ namespace AccountingManagement
         }
         public void AddDataTransactionComboBox()
         {
-            DataTable dt = AccountQuery.AccountTable();
+            DataTable dt = AccountControl.TransactionSelectedDataControl(paidBy);
             TransactionTypeComboBox.ValueMember = dt.Columns[0].ColumnName;
             TransactionTypeComboBox.DisplayMember = dt.Columns[1].ColumnName;
             TransactionTypeComboBox.DataSource = dt;
@@ -86,24 +70,23 @@ namespace AccountingManagement
         }
         public void AddDataPaidByComboBox()
         {
-            DataTable dt = AccountQuery.AccountTable();
+            DataTable dt = AccountControl.PaidByDataControl();
             PaidByComboBox.ValueMember = dt.Columns[0].ColumnName;
             PaidByComboBox.DisplayMember = dt.Columns[1].ColumnName;
             PaidByComboBox.DataSource = dt;
+      
 
         }
         public void AddDataAuthorisedByComboBox()
         {
-            DataTable dt = EmployeeQuery.EmployeeTable();
+            DataTable dt = EmployeeControl.EmployeeDataControl();
             AuthorisedByComboBox.ValueMember = dt.Columns[0].ColumnName;
+          
             AuthorisedByComboBox.DisplayMember = dt.Columns[1].ColumnName;
             AuthorisedByComboBox.DataSource = dt;
 
         }
-        public void DisplayData()
-        {
-            
-        }
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -115,7 +98,7 @@ namespace AccountingManagement
             AddDataAuthorisedByComboBox();
 
             //call method to populate Account related ComboBoxes
-            AddDataTransactionComboBox();
+           // AddDataTransactionComboBox();
             AddDataPaidByComboBox();
             GetStuff();
 
@@ -145,6 +128,12 @@ namespace AccountingManagement
         {
             ComboBox cmb = (ComboBox)sender;
             paidBy = Int32.Parse((string)cmb.SelectedValue);
+            DataTable dt= AccountControl.TransactionSelectedDataControl(paidBy);
+            //  AddDataTransactionComboBox();
+            TransactionTypeComboBox.ValueMember = dt.Columns[0].ColumnName;
+            TransactionTypeComboBox.DisplayMember = dt.Columns[1].ColumnName;
+            TransactionTypeComboBox.DataSource = dt;
+
             //MessageBox.Show(selectedValue.ToString());
 
         }
@@ -152,6 +141,16 @@ namespace AccountingManagement
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
 
         private void NarrationTextBox_TextChanged_1(object sender, EventArgs e)

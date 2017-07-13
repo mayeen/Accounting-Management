@@ -18,6 +18,7 @@ namespace AccountingManagement.Model
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Emp_ID");
                 dt.Columns.Add("First Name");
+                
                 foreach (Employee usepurpose in usepurposes)
                 {
                     dt.Rows.Add(usepurpose.Emp_ID, usepurpose.FName);

@@ -44,6 +44,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.NarrationTextBox = new System.Windows.Forms.TextBox();
             this.listView = new System.Windows.Forms.ListView();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -193,19 +195,30 @@
             // 
             this.listView.FullRowSelect = true;
             this.listView.GridLines = true;
-            this.listView.Location = new System.Drawing.Point(160, 352);
+            this.listView.Location = new System.Drawing.Point(41, 356);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(651, 136);
+            this.listView.Size = new System.Drawing.Size(25, 24);
             this.listView.TabIndex = 16;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(160, 343);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(651, 145);
+            this.dataGridView.TabIndex = 17;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 500);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.NarrationTextBox);
             this.Controls.Add(this.label7);
@@ -225,6 +238,7 @@
             this.Name = "MainForm";
             this.Text = "Main Form";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +262,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox NarrationTextBox;
         internal System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }
 

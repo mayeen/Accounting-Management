@@ -11,3 +11,4 @@ C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\Accou
 C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.exe
 C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.pdb
 C:\Users\DDM-SD\documents\visual studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.MainForm.resources
+C:\Users\DDM-SD\Documents\Visual Studio 2015\Projects\AccountingManagement\AccountingManagement\obj\Debug\AccountingManagement.View.EditForm.resources
