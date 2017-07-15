@@ -28,7 +28,31 @@ namespace AccountingManagement.Model
             }
 
         }
+        public void UpdateIntoVoucher(int VoucherNo, int paidBy, int transactionType, int amount, string narration, DateTime date, string employeeID)
+        {
+            using (AccountingEntity context = new AccountingEntity())
+            {
+                Voucher voucher = context.Vouchers.FirstOrDefault(r => r.VNo==VoucherNo);
+                voucher.Debit = transactionType;
+                voucher.Credit = paidBy;
+                voucher.Amount = amount;
+                voucher.Narration = narration;
+                voucher.VDate = DateTime.Now;
+                voucher.AuthenticationBy = employeeID;
+                context.SaveChanges();
 
+            }
+        }
+        public int returnVoucherNo()
+        {
+            using (AccountingEntity context = new AccountingEntity())
+            {
+
+                int id = context.Vouchers.Max(r => r.VNo);
+                return id + 1;
+            }
+
+        }
         public dynamic DisplayVoucherData()
         {
             

@@ -24,6 +24,7 @@ namespace AccountingManagement
         int paidBy = 0, transactionType = 0,amount=0;
         string employeeID = "dont work",narration="dont work";
         DateTime date;
+        int VoucherNumber = 0;
         public void GetStuff()
         {
             BindingSource bindingSource = new BindingSource();
@@ -60,6 +61,15 @@ namespace AccountingManagement
 
             
         }
+        public void showVoucherID()
+        {
+            VoucherQuery vm = new VoucherQuery();
+            VoucherControl vController = new VoucherControl();
+
+            int i = vController.getVoucherID(vm);
+            VoucherLabel.Text = i.ToString();
+            //Console.WriteLine(i);
+        }
         public void AddDataTransactionComboBox()
         {
             DataTable dt = AccountControl.TransactionSelectedDataControl(paidBy);
@@ -93,7 +103,7 @@ namespace AccountingManagement
             DateLabel.Text = DateTime.Now.ToLongDateString();
             date = DateTime.Now;
 
-            AccountQuery ac = new AccountQuery();
+            
             //call method to populate AuthorisedBy ComboBox
             AddDataAuthorisedByComboBox();
 
@@ -101,8 +111,9 @@ namespace AccountingManagement
            // AddDataTransactionComboBox();
             AddDataPaidByComboBox();
             GetStuff();
+            showVoucherID();
 
-            
+
             // here I have populated Account Table with data that will work only one time 
             //AccountQuery acc = new AccountQuery();
             //acc.AccountDataEntry();
@@ -143,14 +154,23 @@ namespace AccountingManagement
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        //private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
 
-        }
+        //}
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            EditForm up = new EditForm();
+            up.EditVoucherLabel.Text = this.dataGridView.CurrentRow.Cells[0].Value.ToString();
+             VoucherNumber = Convert.ToInt32(up.EditVoucherLabel.Text);
+            //up.TransactionComboBox.Text = this.dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            up.AmountTextBox.Text = this.dataGridView.CurrentRow.Cells[2].Value.ToString();
+            up.EditDateLabel.Text = this.dataGridView.CurrentRow.Cells[3].Value.ToString();
+            //up.PaidByComboBox.Text = this.dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            //up.AuthorisedByComboBox.Text = this.dataGridView1.CurrentRow.Cells[2].Value.ToString();
+
+            up.Show();
         }
 
         private void NarrationTextBox_TextChanged_1(object sender, EventArgs e)
@@ -170,25 +190,11 @@ namespace AccountingManagement
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            //using (AccountingEntity context = new AccountingEntity())
-            //{
-            //    Voucher voucher = new Voucher
-            //    {
-            //        Debit = paidBy,
-            //        Credit = transactionType,
-            //        Amount = amount,
-            //        Narration=narration,
-            //        VDate= date,
-            //        AuthenticationBy=employeeID,
-            //        PreparedBy="A001"
-            //};
-            //    context.Vouchers.Add(voucher);
-            //    MessageBox.Show(voucher.AuthenticationBy.ToString());
-            //    context.SaveChanges();
-            //}
-            VoucherQuery voucher = new VoucherQuery();
-            voucher.InsertIntoVoucher(paidBy, transactionType, amount, narration, date, employeeID);
+
+            VoucherControl voucherControl = new VoucherControl();
+            voucherControl.InsertIntoVoucherControl(paidBy, transactionType, amount, narration, date, employeeID);
             MessageBox.Show("Your transaction has been added");
+            GetStuff();
         }
     }
 }

@@ -168,9 +168,9 @@
             this.VoucherLabel.AutoSize = true;
             this.VoucherLabel.Location = new System.Drawing.Point(157, 54);
             this.VoucherLabel.Name = "VoucherLabel";
-            this.VoucherLabel.Size = new System.Drawing.Size(28, 13);
+            this.VoucherLabel.Size = new System.Drawing.Size(0, 13);
             this.VoucherLabel.TabIndex = 13;
-            this.VoucherLabel.Text = "VNo";
+            this.VoucherLabel.Text = "Voucher Number";
             // 
             // label7
             // 
@@ -208,9 +208,9 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(160, 343);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(651, 145);
             this.dataGridView.TabIndex = 17;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // MainForm
